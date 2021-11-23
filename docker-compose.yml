@@ -1,0 +1,49 @@
+version: "3.7"
+
+services:
+  db:
+    environment:
+      POSTGRES_USER: postscript
+      POSTGRES_PASSWORD: dev
+      POSTGRES_DB: postscript
+    image: postgres:latest
+    networks:
+      - postscript
+    ports:
+      - 5429:5432
+    restart: always
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+
+  api:
+    build: ./api
+    user: postscript
+    depends_on:
+      - db
+    environment:
+      STAGE: dev
+      SQLALCHEMY_DATABASE_URI: postgresql+psycopg2://postscript:dev@db/postscript
+      SQLALCHEMY_TRACK_MODIFICATIONS: 0
+    networks:
+      - postscript
+    ports:
+      - 5000:5000
+    volumes:
+      - ./api:/opt/api
+    restart: always
+
+  app:
+    build: ./app
+    user: postscript
+    depends_on:
+      - api
+    networks:
+      - postscript
+    ports:
+      - 3000:3000
+    stdin_open: true
+    volumes:
+      - ./app:/opt/app
+
+networks:
+  postscript:

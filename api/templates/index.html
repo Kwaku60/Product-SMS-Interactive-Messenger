@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %} 
+<table>
+    <tr>
+        <th> product Id</th>
+        <th>product name</th>
+    </tr>
+    {% for product in products %} 
+</tr>
+<td>{{ product.productId }}</td>
+<td>{{ product.name }} </td>
+{% endfor $}
+</table>
+<table>
+    <tr>
+        <th> product Id</th>
+        <th>product message</th>
+    </tr>
+    {% for message in messages %} 
+</tr>
+<td>{{ message.productId }}</td>
+<td>{{ message.message }} </td>
+<form method= "post">
+    <label for="draft_message"> draft message </label>
+    <input name="draft_message" id="draft_message">
+    <input type="hidden" id="productId" value="{{ message.productId }} ">
+    <input type="submit" value="Save">
+</form>
+<form method="post">
+    <input type="submit" value="Send Message">
+</form>
+</td>
+</tr>
+{% endfor $}
+</table>
+
+{% endblock %}

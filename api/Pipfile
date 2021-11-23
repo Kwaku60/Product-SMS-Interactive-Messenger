@@ -1,0 +1,20 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+Flask = "*"
+Flask-sqlalchemy = "*"
+psycopg2 = "==2.8.5"
+twilio = "==6.23.1"
+flask-marshmallow = "*"
+marshmallow-sqlalchemy = "*"
+flask-cors = "*"
+
+[dev-packages]
+black = "*"
+pytest = "==4.4.1"
+
+[requires]
+python_version = "3.7"
